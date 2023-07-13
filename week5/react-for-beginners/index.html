@@ -10,20 +10,24 @@
   // modifier로 state를 변경할 때, 컴포넌트가 재생성됨.
   //그리고 새로운 값으로 rerender됨
   function Btn(props) {
-    return <button style={{
+    return <button 
+    onClick={props.changeValue}
+    style={{
       backgroundColor: 'tomato',
       color: 'white',
       padding: '10px 20px',
       border: 0,
       borderRadius: 10,
-    }}>{props.banana}</button>
+    }}>{props.text}</button>
   }
-
+  const MemorizedBtn = React.memo(Btn)
   function App() {
+    const [value, setValue] = React.useState("Save Changes");
+    const changeValue = () => setValue("Revert Changes");
     return (
       <div>
-        <Btn banana='Save Changes'/>
-        <Btn banana='Continue'/>
+        <Btn text={value} changeValue={changeValue}/>
+        <Btn text='Continue'/>
       </div>
     )
     
