@@ -10,7 +10,7 @@
 <script type="text/babel">
   // modifier로 state를 변경할 때, 컴포넌트가 재생성됨.
   //그리고 새로운 값으로 rerender됨
-  function Btn({ text, fontSize = 16, changeValue}) {
+  function Btn({ text, fontSize = 12, changeValue}) {
     return <button 
     onClick={changeValue}
     style={{

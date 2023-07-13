@@ -26,15 +26,15 @@ if (a > 2) {
 }
 
 // 3. switch
-
+// 이것은 break를 걸어야 해요.
 var mbti = 'INFP';
 var val;
 switch (mbti) {
   case 'INFP':
-    val = 'INFP';
+    val = 'INFP'; break;
   case 'ENFP':
-    val = 'ENFP';
+    val = 'ENFP'; break;
   case 'ISTJ':
-    val = 'ISTJ';
-  default: val = '유효한 값이 아닙니다다'
+    val = 'ISTJ'; break;
+  default: val = '유효한 값이 아닙니다'
 }
