@@ -1,51 +1,32 @@
-import Button from "./Button";
-import styles from "./App.module.css";
-import { useState, useEffect } from "react";
-
-function Hello() {
-  function byFn() {
-    console.log('bye :(');
-  }
-  function hiFn() {
-    console.log('created :)');
-    return byFn;
-  }
-  useEffect(()=>{
-    console.log('hi');
-    return () => console.log('bye');
-  }, []);
-  return <h1>Hello</h1>;
-}
-
+import { useState } from "react";
 function App() {
-  const [counter, setValue] = useState(0);
-  const [keyword, setKeyword] = useState("");
-  const [showing, setShowing] = useState(false);
-  const onClick = () => setValue((prev) => prev + 1);
-  const onChange = (e) => setKeyword(e.target.value);
-  const onClickShowing = () => setShowing(prev => !prev);
-  console.log('all the time')
-  useEffect(() => {
-    console.log('only one')
-  }, []);
-  useEffect(() => {
-    if (keyword !== "" && keyword.length > 5) {
-      console.log('search for', keyword);
+  const [toDo, setToDo] = useState("");
+  const [toDos, setToDos] = useState([]);
+  const onChange = (e) => setToDo(e.target.value);
+  const onSubmit = (e) => {
+    e.preventDefault();
+    if (toDo === "") {
+      return;
     }
-  }, [keyword]);
+    setToDos(currentArray => [toDo, ...currentArray]);
+    setToDo("");
+  };
+  console.log(toDos)
   return (
     <div className="App">
-      <input 
-      value={keyword} 
-      onChange={onChange} 
-      type="text" 
-      placeholder="Search here,,"/>
-      <h1 className={styles.title}>{counter}</h1>
-      <Button text={"counter"} onClick={onClick}/>
-      <div>
-        {showing ? <Hello/> : null}
-        <button onClick={onClickShowing}>{showing ? "Hide" : "Show"}</button>
-      </div>
+      <h1>My To Dos ({toDos.length})</h1>
+      <form onSubmit={onSubmit}>
+        <input 
+        onChange={onChange} 
+        value={toDo} 
+        type="text" 
+        placeholder="Write your to do..."/>
+        <button>Add To Do</button>
+      </form>
+      <hr />
+      <ul>
+        {toDos.map((item, index) => (<li key={index}>{item}</li>))}
+      </ul>
     </div>
   );
 }
